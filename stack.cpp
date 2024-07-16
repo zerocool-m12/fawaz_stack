@@ -14,6 +14,7 @@ class stack{             // making a template class
       stack(const std::initializer_list<T>&arr){        // a constructor with an initilizer_list to add elements to the stack
           sze = 0;
           data = new T[arr.size()];
+          if(data == nullptr) throw std::bad_alloc();    // throwing an error message if the allocation failed
           for(auto&i:arr)
             data[sze++] = i;
       }
@@ -40,6 +41,7 @@ class stack{             // making a template class
           if(data == nullptr){
               sze = 0;
               data = new T[++sze];
+              if(data == nullptr) throw std::bad_alloc();
               data[0] = x;
           }else{
           data = (T*)realloc(data,++sze * sizeof(T));  // resizing the stack to make sure there is a capacity to the new element
@@ -50,6 +52,7 @@ class stack{             // making a template class
           if(this != &other){
           this->sze = other.sze;
           this->data = new T[sze];
+          if(this->data == nullptr) throw std::bad_alloc();
           for(int i = 0; i < sze; i++)
             this->data[i] = other.data[i];
           }
@@ -58,6 +61,7 @@ class stack{             // making a template class
         if(this != &other){
           this->sze = other.sze;
           this->data = new T[sze];
+          if(this->data == nullptr) throw std::bad_alloc();
           for(int i = 0; i < sze; i++)
             this->data[i] = other.data[i];
           }
@@ -68,6 +72,7 @@ class stack{             // making a template class
           if(this != &other){
           this->sze = other.sze; 
           this->data = new T[sze];
+          if(this->data == nullptr) throw std::bad_alloc();
           for(int i = 0; i <sze; i++){
               this->data[i] = other.data[i];
           }
@@ -80,6 +85,7 @@ class stack{             // making a template class
           if(this != &other){
           this->sze = other.sze; 
           this->data = new T[sze];
+          if(this->data == nullptr) throw std::bad_alloc();
           for(int i = 0; i <sze; i++){
               this->data[i] = other.data[i];
           }
@@ -104,6 +110,6 @@ int main(){
     }
     std::cout<<std::endl;
     
-    std::cout<<s1.size()<<std::endl;
+    std::cout<<"The size of the stack is: "<<s1.size()<<std::endl;
     return EXIT_SUCCESS;
 }
